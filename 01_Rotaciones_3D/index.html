@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Representaciones de Rotación en 3D</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Representaciones de Rotación en 3D</h1>
+            
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="buttons-row">
+                    <button id="euler-btn" class="representation-btn active">Ángulos de Euler</button>
+                    <button id="quaternion-btn" class="representation-btn">Cuaterniones</button>
+                    <button id="matrix-btn" class="representation-btn">Matrices</button>
+                </div>
+                
+                <div class="actions-row">
+                    <button id="gimbal-lock-btn" class="action-btn danger">Demo Gimbal Lock</button>
+                    <button id="interpolation-btn" class="action-btn warning">Demo Interpolación</button>
+                    <button id="comparison-btn" class="action-btn info">Mostrar Comparación</button>
+                    <button id="reset-btn" class="action-btn secondary">Reset</button>
+                </div>
+            </div>
+
+            <!-- 3D Visualization -->
+            <div class="visualization">
+                <div id="three-container"></div>
+                <div id="comparison-labels" class="comparison-labels hidden">
+                    <span>Euler (Izquierda)</span>
+                    <span>Actual (Centro)</span>
+                    <span>Quaternion (Derecha)</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-grid">
+                <!-- Euler Controls -->
+                <div class="control-section">
+                    <h3 class="euler-title">Ángulos de Euler (XYZ)</h3>
+                    <div class="control-group">
+                        <label>X (Roll): <span id="euler-x-value">0.0°</span></label>
+                        <input type="range" id="euler-x" min="-180" max="180" value="0" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label>Y (Pitch): <span id="euler-y-value">0.0°</span></label>
+                        <input type="range" id="euler-y" min="-180" max="180" value="0" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label>Z (Yaw): <span id="euler-z-value">0.0°</span></label>
+                        <input type="range" id="euler-z" min="-180" max="180" value="0" class="slider">
+                    </div>
+                    <div id="gimbal-warning" class="warning hidden">
+                        ⚠️ Cerca de Gimbal Lock (Y ≈ ±90°)
+                    </div>
+                </div>
+
+                <!-- Quaternion Controls -->
+                <div class="control-section">
+                    <h3 class="quaternion-title">Cuaternión</h3>
+                    <div class="control-group">
+                        <label>W: <span id="quat-w-value">1.000</span></label>
+                        <input type="range" id="quat-w" min="-1" max="1" step="0.01" value="1" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label>X: <span id="quat-x-value">0.000</span></label>
+                        <input type="range" id="quat-x" min="-1" max="1" step="0.01" value="0" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label>Y: <span id="quat-y-value">0.000</span></label>
+                        <input type="range" id="quat-y" min="-1" max="1" step="0.01" value="0" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label>Z: <span id="quat-z-value">0.000</span></label>
+                        <input type="range" id="quat-z" min="-1" max="1" step="0.01" value="0" class="slider">
+                    </div>
+                    <div class="magnitude">
+                        Magnitude: <span id="quat-magnitude">1.000</span>
+                    </div>
+                </div>
+
+                <!-- Matrix Display -->
+                <div class="control-section">
+                    <h3 class="matrix-title">Matriz de Rotación</h3>
+                    <div id="matrix-display" class="matrix-grid">
+                        <!-- Matrix elements will be populated by JavaScript -->
+                    </div>
+                    <div class="determinant">
+                        Det: <span id="matrix-determinant">1.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Panel -->
+            <div class="info-panel">
+                <h3>Información Actual</h3>
+                <div class="info-grid">
+                    <div class="info-section">
+                        <h4 class="euler-title">Ángulos de Euler</h4>
+                        <p>• Intuitivo y fácil de entender</p>
+                        <p>• Propenso a Gimbal Lock</p>
+                        <p>• 3 valores (compacto)</p>
+                    </div>
+                    <div class="info-section">
+                        <h4 class="quaternion-title">Cuaterniones</h4>
+                        <p>• Sin singularidades</p>
+                        <p>• Interpolación suave (SLERP)</p>
+                        <p>• 4 valores normalizados</p>
+                    </div>
+                    <div class="info-section">
+                        <h4 class="matrix-title">Matrices</h4>
+                        <p>• Aplicación directa</p>
+                        <p>• 9 valores (redundante)</p>
+                        <p>• Composición por multiplicación</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="demo-info" class="demo-info hidden">
+                <h3>Demostración de Gimbal Lock</h3>
+                <p>
+                    Observa cómo cuando Y está cerca de ±90°, los ejes X y Z se comportan de manera similar, 
+                    perdiendo un grado de libertad efectivo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

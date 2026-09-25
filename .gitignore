@@ -1,0 +1,21 @@
+# Binarios compilados
+*.exe
+*.o
+*.obj.o
+*.pdb
+*.ilk
+build/
+
+# Node / Vite
+node_modules/
+dist/
+
+# Configuración local del editor y de Claude Code
+.claude/
+.vscode/settings.json
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+nul

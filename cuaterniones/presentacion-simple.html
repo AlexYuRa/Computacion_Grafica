@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Cuaterniones</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .lucide { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Componentes de iconos simplificados
+        const ChevronLeft = ({ size = 24 }) => (
+            <svg className="lucide" width={size} height={size} viewBox="0 0 24 24">
+                <path d="m15 18-6-6 6-6"/>
+            </svg>
+        );
+
+        const ChevronRight = ({ size = 24 }) => (
+            <svg className="lucide" width={size} height={size} viewBox="0 0 24 24">
+                <path d="m9 18 6-6-6-6"/>
+            </svg>
+        );
+
+        const QuaternionPresentation = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+
+            const slides = [
+                // Slide 1: Título
+                {
+                    title: "Cuaterniones",
+                    subtitle: "Representación Matemática de Rotaciones en 3D",
+                    content: (
+                        <div className="flex flex-col items-center justify-center h-full space-y-8">
+                            <div className="text-6xl font-bold text-blue-600">Cuaterniones</div>
+                            <div className="text-2xl text-gray-600">Representación Matemática de Rotaciones en 3D</div>
+                        </div>
+                    )
+                },
+                // Slide 2: Fundamento Matemático
+                {
+                    title: "Fundamento Matemático",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl">Un cuaternión es una extensión de los números complejos a 4 dimensiones.</p>
+                            <p className="text-xl">Para rotaciones usamos <span className="font-bold text-blue-600">cuaterniones unitarios</span> (norma = 1)</p>
+                            
+                            <div className="bg-blue-50 p-6 rounded-lg space-y-4">
+                                <div>
+                                    <p className="font-semibold text-lg mb-2">Forma general:</p>
+                                    <p className="text-2xl font-mono text-center">q = w + xi + yj + zk</p>
+                                </div>
+                                
+                                <div className="text-lg space-y-2">
+                                    <p>Donde:</p>
+                                    <ul className="list-disc ml-8 space-y-1">
+                                        <li>w, x, y, z son números reales</li>
+                                        <li>i, j, k son unidades imaginarias con: <span className="font-mono">i² = j² = k² = ijk = -1</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="bg-green-50 p-6 rounded-lg">
+                                <p className="font-semibold text-lg mb-2">Forma vectorial:</p>
+                                <p className="text-2xl font-mono text-center mb-4">q = [w, (x, y, z)] = [w, v]</p>
+                                <ul className="list-disc ml-8 space-y-1 text-lg">
+                                    <li><span className="font-bold">w:</span> parte escalar (real)</li>
+                                    <li><span className="font-bold">v = (x, y, z):</span> parte vectorial (imaginaria)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 3: Representación de Rotaciones
+                {
+                    title: "Representación de Rotaciones",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl">Una rotación de ángulo <span className="font-bold">θ</span> alrededor del eje unitario <span className="font-bold">n = (nx, ny, nz)</span> se representa como:</p>
+                            
+                            <div className="bg-purple-50 p-8 rounded-lg space-y-4">
+                                <p className="text-2xl font-mono text-center">q = [cos(θ/2), sin(θ/2) · n]</p>
+                                <p className="text-xl font-mono text-center">= [cos(θ/2), sin(θ/2)·nx, sin(θ/2)·ny, sin(θ/2)·nz]</p>
+                            </div>
+
+                            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded">
+                                <p className="font-bold text-lg mb-2">⚠️ Nota importante:</p>
+                                <p className="text-xl">El ángulo se divide por 2, característica fundamental de los cuaterniones.</p>
+                            </div>
+
+                            <div className="mt-8 text-center">
+                                <div className="inline-block bg-gray-100 p-6 rounded-lg">
+                                    <p className="text-lg text-gray-700">Ejemplo: Rotación de 90° → se usa 45° en la fórmula</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 4: Operaciones Fundamentales (Parte 1)
+                {
+                    title: "Operaciones Fundamentales (1/2)",
+                    content: (
+                        <div className="space-y-6">
+                            <div className="bg-blue-50 p-6 rounded-lg">
+                                <p className="font-bold text-xl mb-3">Conjugado:</p>
+                                <p className="text-2xl font-mono text-center">q* = [w, -v] = [w, -x, -y, -z]</p>
+                            </div>
+
+                            <div className="bg-green-50 p-6 rounded-lg">
+                                <p className="font-bold text-xl mb-3">Norma:</p>
+                                <p className="text-2xl font-mono text-center">||q|| = √(w² + x² + y² + z²)</p>
+                            </div>
+
+                            <div className="bg-purple-50 p-6 rounded-lg">
+                                <p className="font-bold text-xl mb-3">Inverso (para cuaternión unitario):</p>
+                                <p className="text-2xl font-mono text-center">q⁻¹ = q*</p>
+                                <p className="text-lg text-gray-600 text-center mt-2">(Para cuaterniones unitarios, el inverso es simplemente el conjugado)</p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 5: Operaciones Fundamentales (Parte 2)
+                {
+                    title: "Operaciones Fundamentales (2/2)",
+                    content: (
+                        <div className="space-y-6">
+                            <div className="bg-orange-50 p-6 rounded-lg">
+                                <p className="font-bold text-xl mb-3">Multiplicación (composición de rotaciones):</p>
+                                <p className="text-lg font-mono mb-4">q₁ · q₂ = [w₁w₂ - v₁·v₂, w₁v₂ + w₂v₁ + v₁×v₂]</p>
+                                
+                                <p className="font-semibold text-lg mt-4 mb-2">Explícitamente:</p>
+                                <div className="font-mono text-sm space-y-1 bg-white p-4 rounded">
+                                    <p>q₁ · q₂ = [</p>
+                                    <p className="ml-4">w₁w₂ - x₁x₂ - y₁y₂ - z₁z₂,</p>
+                                    <p className="ml-4">w₁x₂ + x₁w₂ + y₁z₂ - z₁y₂,</p>
+                                    <p className="ml-4">w₁y₂ - x₁z₂ + y₁w₂ + z₁x₂,</p>
+                                    <p className="ml-4">w₁z₂ + x₁y₂ - y₁x₂ + z₁w₂</p>
+                                    <p>]</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-red-100 border-l-4 border-red-500 p-6 rounded">
+                                <p className="font-bold text-lg mb-2">⚠️ IMPORTANTE:</p>
+                                <p className="text-xl">La multiplicación NO es conmutativa: <span className="font-mono">q₁·q₂ ≠ q₂·q₁</span></p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 6: Rotación de un Vector
+                {
+                    title: "Rotación de un Vector",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl">Para rotar un vector <span className="font-bold">v</span> usando el cuaternión <span className="font-bold">q</span>:</p>
+                            
+                            <div className="bg-blue-50 p-6 rounded-lg">
+                                <p className="font-bold text-lg mb-4">Método general:</p>
+                                <ol className="list-decimal ml-8 space-y-3 text-lg">
+                                    <li>Extender v a cuaternión puro: <span className="font-mono">p = [0, v]</span></li>
+                                    <li>Aplicar: <span className="font-mono">p' = q · p · q*</span></li>
+                                    <li>Extraer parte vectorial de p'</li>
+                                </ol>
+                            </div>
+
+                            <div className="bg-green-50 p-6 rounded-lg">
+                                <p className="font-bold text-lg mb-4">Forma optimizada (evita multiplicaciones completas):</p>
+                                <p className="text-xl font-mono text-center mb-3">v' = v + 2w(v_q × v) + 2(v_q × (v_q × v))</p>
+                                <p className="text-lg text-gray-700">donde <span className="font-mono">v_q = (x, y, z)</span> es la parte vectorial de q</p>
+                            </div>
+
+                            <div className="bg-yellow-50 p-4 rounded-lg text-center">
+                                <p className="text-lg">✨ La forma optimizada es más eficiente computacionalmente</p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 7: Conversión entre Representaciones (Parte 1)
+                {
+                    title: "Conversión: Cuaternión → Matriz",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl mb-4">Cuaternión → Matriz de Rotación:</p>
+                            
+                            <div className="bg-blue-50 p-6 rounded-lg overflow-x-auto">
+                                <div className="font-mono text-lg">
+                                    <p className="text-center mb-2">R = </p>
+                                    <div className="grid grid-cols-3 gap-2 text-sm">
+                                        <div className="bg-white p-2 rounded text-center">1-2(y²+z²)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(xy-wz)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(xz+wy)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(xy+wz)</div>
+                                        <div className="bg-white p-2 rounded text-center">1-2(x²+z²)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(yz-wx)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(xz-wy)</div>
+                                        <div className="bg-white p-2 rounded text-center">2(yz+wx)</div>
+                                        <div className="bg-white p-2 rounded text-center">1-2(x²+y²)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gray-100 p-6 rounded-lg">
+                                <p className="font-bold text-lg mb-2">Nota:</p>
+                                <p className="text-lg">Esta conversión es útil cuando se necesita enviar transformaciones a APIs gráficas que trabajan con matrices.</p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 8: Conversión entre Representaciones (Parte 2)
+                {
+                    title: "Conversión: Matriz → Cuaternión",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl mb-4">Matriz → Cuaternión:</p>
+                            
+                            <div className="bg-green-50 p-6 rounded-lg">
+                                <div className="font-mono text-xl space-y-3">
+                                    <p>w = √(1 + r₁₁ + r₂₂ + r₃₃) / 2</p>
+                                    <p>x = (r₃₂ - r₂₃) / (4w)</p>
+                                    <p>y = (r₁₃ - r₃₁) / (4w)</p>
+                                    <p>z = (r₂₁ - r₁₂) / (4w)</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded">
+                                <p className="font-bold text-lg mb-2">⚠️ Advertencia:</p>
+                                <p className="text-lg">Esta es una de las fórmulas posibles. Existen métodos más robustos numéricamente que manejan casos especiales cuando w es cercano a cero.</p>
+                            </div>
+
+                            <div className="bg-blue-50 p-4 rounded-lg">
+                                <p className="text-lg text-center">💡 Donde rᵢⱼ son los elementos de la matriz de rotación R</p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 9: SLERP
+                {
+                    title: "Interpolación: SLERP",
+                    content: (
+                        <div className="space-y-6">
+                            <p className="text-xl"><span className="font-bold">SLERP</span> (Spherical Linear Interpolation) permite interpolar suavemente entre dos rotaciones:</p>
+                            
+                            <div className="bg-purple-50 p-6 rounded-lg">
+                                <p className="text-xl font-mono text-center mb-4">
+                                    slerp(q₁, q₂, t) = sin((1-t)Ω)/sin(Ω) · q₁ + sin(tΩ)/sin(Ω) · q₂
+                                </p>
+                            </div>
+
+                            <div className="bg-blue-50 p-6 rounded-lg space-y-3">
+                                <p className="font-bold text-lg">Donde:</p>
+                                <ul className="list-disc ml-8 space-y-2 text-lg">
+                                    <li><span className="font-mono">Ω = arccos(q₁ · q₂)</span> es el ángulo entre cuaterniones</li>
+                                    <li><span className="font-mono">t ∈ [0, 1]</span> es el parámetro de interpolación</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-green-100 p-6 rounded-lg">
+                                <p className="font-bold text-lg mb-2">✨ Ventaja Principal:</p>
+                                <p className="text-xl">SLERP produce rotaciones uniformes y suaves, ideal para animaciones.</p>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 10: Ventajas
+                {
+                    title: "Ventajas de los Cuaterniones",
+                    content: (
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Compacto</p>
+                                    <p className="text-gray-700">Solo 4 números (vs 9 de matrices)</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Sin gimbal lock</p>
+                                    <p className="text-gray-700">No tiene singularidades</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Interpolación suave</p>
+                                    <p className="text-gray-700">SLERP produce rotaciones uniformes</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Eficiente</p>
+                                    <p className="text-gray-700">Composición y normalización rápidas</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Estable numéricamente</p>
+                                    <p className="text-gray-700">Fácil mantener unitario (renormalización simple)</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                    <p className="font-bold text-lg">✓ Menos operaciones</p>
+                                    <p className="text-gray-700">Para composición que matrices</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 11: Desventajas
+                {
+                    title: "Desventajas de los Cuaterniones",
+                    content: (
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <p className="font-bold text-lg">✗ Menos intuitivo</p>
+                                    <p className="text-gray-700">Difícil de visualizar mentalmente</p>
+                                </div>
+                                
+                                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <p className="font-bold text-lg">✗ Doble cobertura</p>
+                                    <p className="text-gray-700">q y -q representan la misma rotación</p>
+                                </div>
+                                
+                                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <p className="font-bold text-lg">✗ Multiplicación no conmutativa</p>
+                                    <p className="text-gray-700">El orden importa en las composiciones</p>
+                                </div>
+                                
+                                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <p className="font-bold text-lg">✗ Requiere normalización periódica</p>
+                                    <p className="text-gray-700">Para mantener la norma unitaria</p>
+                                </div>
+                                
+                                <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                    <p className="font-bold text-lg">✗ Conversión a matriz</p>
+                                    <p className="text-gray-700">Necesaria para algunos cálculos gráficos</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 12: Aplicaciones
+                {
+                    title: "Aplicaciones de Cuaterniones",
+                    content: (
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="bg-blue-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">🎬 Animación 3D</p>
+                                    <p className="text-gray-700 text-lg">Interpolación suave crítica para movimientos realistas</p>
+                                </div>
+                                
+                                <div className="bg-purple-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">🎮 Videojuegos</p>
+                                    <p className="text-gray-700 text-lg">Control de cámaras y movimiento de personajes</p>
+                                </div>
+                                
+                                <div className="bg-green-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">🔬 Simulación física</p>
+                                    <p className="text-gray-700 text-lg">Orientación de objetos en física</p>
+                                </div>
+                                
+                                <div className="bg-yellow-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">🛰️ Control de actitud</p>
+                                    <p className="text-gray-700 text-lg">Satélites y drones</p>
+                                </div>
+                                
+                                <div className="bg-pink-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">🥽 Realidad virtual</p>
+                                    <p className="text-gray-700 text-lg">Seguimiento de movimientos de cabeza</p>
+                                </div>
+                                
+                                <div className="bg-orange-50 p-5 rounded-lg">
+                                    <p className="font-bold text-xl mb-2">📡 Sistemas de seguimiento</p>
+                                    <p className="text-gray-700 text-lg">Aplicaciones con muchas composiciones de rotaciones</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 13: Tabla Comparativa (Parte 1)
+                {
+                    title: "Comparación: Dimensión y Memoria",
+                    content: (
+                        <div className="space-y-4">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-200">
+                                        <th className="border border-gray-400 p-3 text-left">Característica</th>
+                                        <th className="border border-gray-400 p-3 text-center">Matrices</th>
+                                        <th className="border border-gray-400 p-3 text-center">Euler</th>
+                                        <th className="border border-gray-400 p-3 text-center">Cuaterniones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Dimensión</td>
+                                        <td className="border border-gray-400 p-3 text-center">9 valores (3×3)</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">3 valores</td>
+                                        <td className="border border-gray-400 p-3 text-center">4 valores</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Grados de libertad</td>
+                                        <td className="border border-gray-400 p-3 text-center">3 (con 6 restricciones)</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">3</td>
+                                        <td className="border border-gray-400 p-3 text-center">3 (con 1 restricción)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Memoria</td>
+                                        <td className="border border-gray-400 p-3 text-center">36 bytes</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">12 bytes</td>
+                                        <td className="border border-gray-400 p-3 text-center">16 bytes</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Intuitividad</td>
+                                        <td className="border border-gray-400 p-3 text-center">Media</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Alta</td>
+                                        <td className="border border-gray-400 p-3 text-center">Baja</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p className="text-sm text-gray-600 italic">m = multiplicaciones, s = sumas</p>
+                        </div>
+                    )
+                },
+                // Slide 14: Tabla Comparativa (Parte 2)
+                {
+                    title: "Comparación: Problemas y Singularidades",
+                    content: (
+                        <div className="space-y-4">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-200">
+                                        <th className="border border-gray-400 p-3 text-left">Característica</th>
+                                        <th className="border border-gray-400 p-3 text-center">Matrices</th>
+                                        <th className="border border-gray-400 p-3 text-center">Euler</th>
+                                        <th className="border border-gray-400 p-3 text-center">Cuaterniones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Gimbal Lock</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">❌ No sufre</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">✅ Sí, problema crítico</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">❌ No sufre</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Singularidades</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Ninguna</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">En ±90° del eje medio</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Ninguna</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Ambigüedad</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Única</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Múltiples</td>
+                                        <td className="border border-gray-400 p-3 text-center">Doble (q y -q)</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Continuidad</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Continua</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Discontinuidades</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Continua</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                },
+                // Slide 15: Tabla Comparativa (Parte 3)
+                {
+                    title: "Comparación: Operaciones",
+                    content: (
+                        <div className="space-y-4">
+                            <table className="w-full border-collapse text-sm">
+                                <thead>
+                                    <tr className="bg-gray-200">
+                                        <th className="border border-gray-400 p-3 text-left">Característica</th>
+                                        <th className="border border-gray-400 p-3 text-center">Matrices</th>
+                                        <th className="border border-gray-400 p-3 text-center">Euler</th>
+                                        <th className="border border-gray-400 p-3 text-center">Cuaterniones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Composición</td>
+                                        <td className="border border-gray-400 p-3 text-center">Mult. matriz (27m, 18s)</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Conversión primero</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Mult. (16m, 12s)</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Aplicar a vector</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Directa (9m, 6s)</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Conversión necesaria</td>
+                                        <td className="border border-gray-400 p-3 text-center">Fórmula (15m, 15s)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Interpolación</td>
+                                        <td className="border border-gray-400 p-3 text-center">Difícil, no lineal</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Muy problemática</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">SLERP: excelente</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Inversión</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Transposición</td>
+                                        <td className="border border-gray-400 p-3 text-center">Invertir orden/signos</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Conjugado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                },
+                // Slide 16: Tabla Comparativa (Parte 4)
+                {
+                    title: "Comparación: Estabilidad y Rendimiento",
+                    content: (
+                        <div className="space-y-4">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-200">
+                                        <th className="border border-gray-400 p-3 text-left">Característica</th>
+                                        <th className="border border-gray-400 p-3 text-center">Matrices</th>
+                                        <th className="border border-gray-400 p-3 text-center">Euler</th>
+                                        <th className="border border-gray-400 p-3 text-center">Cuaterniones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Estabilidad numérica</td>
+                                        <td className="border border-gray-400 p-3 text-center">Puede perder ortogonalidad</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Estable</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Muy estable</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border border-gray-400 p-3 font-semibold">Velocidad composición</td>
+                                        <td className="border border-gray-400 p-3 text-center">Media</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Lenta</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Rápida</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-400 p-3 font-semibold">Uso GPU</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Excelente (hardware nativo)</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-red-100">Pobre</td>
+                                        <td className="border border-gray-400 p-3 text-center bg-green-100">Bueno</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                },
+                // Slide 17: Resumen
+                {
+                    title: "Resumen",
+                    content: (
+                        <div className="space-y-6">
+                            <div className="bg-blue-50 p-6 rounded-lg">
+                                <p className="font-bold text-2xl mb-4">🎯 Puntos Clave</p>
+                                <ul className="space-y-3 text-lg">
+                                    <li className="flex items-start">
+                                        <span className="mr-3">•</span>
+                                        <span>Los cuaterniones son una representación eficiente y estable de rotaciones 3D</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-3">•</span>
+                                        <span>Evitan el gimbal lock y no tienen singularidades</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-3">•</span>
+                                        <span>SLERP permite interpolación suave entre rotaciones</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-3">•</span>
+                                        <span>Son ideales para animación, videojuegos y simulaciones</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-green-50 p-6 rounded-lg">
+                                <p className="font-bold text-2xl mb-4">✅ Cuándo Usar Cuaterniones</p>
+                                <ul className="space-y-2 text-lg">
+                                    <li>• Cuando necesitas interpolar rotaciones</li>
+                                    <li>• Para evitar gimbal lock</li>
+                                    <li>• Cuando haces muchas composiciones de rotaciones</li>
+                                    <li>• Para estabilidad numérica a largo plazo</li>
+                                </ul>
+                            </div>
+
+                            <div className="bg-yellow-50 p-6 rounded-lg">
+                                <p className="font-bold text-2xl mb-4">⚠️ Cuándo Considerar Alternativas</p>
+                                <ul className="space-y-2 text-lg">
+                                    <li>• Cuando la intuitividad es prioritaria (Euler)</li>
+                                    <li>• Para hardware gráfico directo (Matrices)</li>
+                                    <li>• Cuando no hay composiciones frecuentes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    )
+                },
+                // Slide 18: Fin
+                {
+                    title: "Fin",
+                    content: (
+                        <div className="flex flex-col items-center justify-center h-full space-y-8">
+                            <div className="text-6xl">🎓</div>
+                            <div className="text-5xl font-bold text-blue-600">¡Gracias!</div>
+                            <div className="text-2xl text-gray-600">Cuaterniones: Matemáticas para Rotaciones 3D</div>
+                            <div className="mt-8 text-xl text-gray-500">¿Preguntas?</div>
+                        </div>
+                    )
+                }
+            ];
+
+            const nextSlide = () => {
+                if (currentSlide < slides.length - 1) {
+                    setCurrentSlide(currentSlide + 1);
+                }
+            };
+
+            const prevSlide = () => {
+                if (currentSlide > 0) {
+                    setCurrentSlide(currentSlide - 1);
+                }
+            };
+
+            const goToSlide = (index) => {
+                setCurrentSlide(index);
+            };
+
+            return (
+                <div className="w-full h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col">
+                    {/* Main Slide Area */}
+                    <div className="flex-1 flex items-center justify-center p-8">
+                        <div className="w-full max-w-6xl h-full bg-white rounded-2xl shadow-2xl p-12 flex flex-col">
+                            {/* Slide Title */}
+                            {slides[currentSlide].title && currentSlide !== 0 && currentSlide !== slides.length - 1 && (
+                                <div className="mb-6 pb-4 border-b-2 border-blue-500">
+                                    <h1 className="text-4xl font-bold text-gray-800">{slides[currentSlide].title}</h1>
+                                    {slides[currentSlide].subtitle && (
+                                        <p className="text-xl text-gray-600 mt-2">{slides[currentSlide].subtitle}</p>
+                                    )}
+                                </div>
+                            )}
+                            
+                            {/* Slide Content */}
+                            <div className="flex-1 overflow-y-auto">
+                                {slides[currentSlide].content}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Navigation Controls */}
+                    <div className="bg-white border-t border-gray-200 px-8 py-4">
+                        <div className="max-w-6xl mx-auto flex items-center justify-between">
+                            {/* Previous Button */}
+                            <button
+                                onClick={prevSlide}
+                                disabled={currentSlide === 0}
+                                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all ${
+                                    currentSlide === 0
+                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                        : 'bg-blue-500 text-white hover:bg-blue-600 shadow-md hover:shadow-lg'
+                                }`}
+                            >
+                                <ChevronLeft size={24} />
+                                <span>Anterior</span>
+                            </button>
+
+                            {/* Slide Indicators */}
+                            <div className="flex items-center space-x-2">
+                                {slides.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => goToSlide(index)}
+                                        className={`w-3 h-3 rounded-full transition-all ${
+                                            index === currentSlide
+                                                ? 'bg-blue-500 w-8'
+                                                : 'bg-gray-300 hover:bg-gray-400'
+                                        }`}
+                                        title={`Ir a diapositiva ${index + 1}`}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Next Button */}
+                            <button
+                                onClick={nextSlide}
+                                disabled={currentSlide === slides.length - 1}
+                                className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all ${
+                                    currentSlide === slides.length - 1
+                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                        : 'bg-blue-500 text-white hover:bg-blue-600 shadow-md hover:shadow-lg'
+                                }`}
+                            >
+                                <span>Siguiente</span>
+                                <ChevronRight size={24} />
+                            </button>
+                        </div>
+
+                        {/* Slide Counter */}
+                        <div className="text-center mt-3 text-gray-600 font-medium">
+                            Diapositiva {currentSlide + 1} de {slides.length}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<QuaternionPresentation />, document.getElementById('root'));
+    </script>
+</body>
+</html>

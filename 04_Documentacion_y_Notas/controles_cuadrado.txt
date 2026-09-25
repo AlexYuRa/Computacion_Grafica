@@ -1,0 +1,23 @@
+CONTROLES DEL CUADRADO - INSTRUCCIONES DE USO
+=============================================
+
+MOVIMIENTO HORIZONTAL (nuevo):
+- Tecla 'D' o FLECHA DERECHA: Mover el cuadrado hacia la derecha
+- Tecla 'S' o FLECHA IZQUIERDA: Mover el cuadrado hacia la izquierda
+
+SALTOS (funcionalidad original):
+- Tecla 'A': Salto diagonal hacia la izquierda
+- Tecla 'B': Salto diagonal hacia la derecha
+- FLECHA ARRIBA: Salto vertical sin dirección
+
+CARACTERÍSTICAS:
+✓ El movimiento horizontal es independiente del salto
+✓ Puedes moverte horizontalmente mientras saltas
+✓ El cuadrado no se sale de los límites de la pantalla
+✓ Controles suaves y responsivos
+
+IMPLEMENTACIÓN TÉCNICA:
+- Variable 'mov': controla el movimiento horizontal continuo
+- Variable 'tx': controla el movimiento durante el salto
+- Posición final del cuadrado: tx + mov
+- Funciones separadas para evitar conflictos entre movimientos

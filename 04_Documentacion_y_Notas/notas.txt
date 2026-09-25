@@ -1,0 +1,397 @@
+    glPushMatrix();
+    // Centrar el árbol en la ventana
+
+    glScalef( 0.13 , 0.12 , 1.0 );         // Escalar uniformemente para que quepa mejor
+    glTranslatef( 75.0 , -58 , 0.0 );  // Mover hacia el centro del sistema de coordenadas
+    
+    glPushMatrix();
+            // Arbol Marco
+            //////////////// ARBOL 2 ///////////////////
+
+// CONTORNO HOJAS 2 //////
+glBegin(GL_TRIANGLES);
+glColor3ub(185, 174, 96);/// 1 (antes 231,217,120) // rgb(185,174,96)
+glVertex2f(45.8253, 2.69051); // C
+glVertex2f(35.66752, -8.54965); //D
+glVertex2f(40.23563, -10.01009); //E
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(170, 159, 70);/// 2 (antes 219,206,91) // rgb(170,159,70)
+glVertex2f(45.8253, 2.69051); // C
+glVertex2f(40.23563, -10.01009); //E
+glVertex2f(46.31322, -4.63534); // F
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(104, 115, 37);/// 3 (antes 130,144,47) // rgb(104,115,37)
+glVertex2f(40.23563, -10.01009); //E
+glVertex2f(46.31322, -4.63534); // F
+glVertex2f(46.93021, -12.41495); //G
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(83, 92, 25);/// 4 (antes 104,116,32) // rgb(83,92,25)
+glVertex2f(40.23563, -10.01009); //E
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(40.59911, -13.39239); // H
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(52, 84, 35);/// 5 (antes 67,107,44) // rgb(52,84,35)
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(40.59911, -13.39239); // H
+glVertex2f(45.38482, -18.68979); //I
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(47, 73, 29);/// 6 (antes 61,91,37) // rgb(47,73,29)
+glVertex2f(40.59911, -13.39239); // H
+glVertex2f(45.38482, -18.68979); //I
+glVertex2f(37.97781, -18.70163); //J
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(36, 55, 18);/// 7 (antes 47,71,23) // rgb(36,55,18)
+glVertex2f(45.38482, -18.68979); //I
+glVertex2f(37.97781, -18.70163); //J
+glVertex2f(48.94129, -22.10843); // K
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(47, 73, 29);/// 8 (antes 61,91,37) // rgb(47,73,29)
+glVertex2f(45.38482, -18.68979); //I
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(48.94129, -22.10843); // K
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(36, 55, 18);/// 9 (antes 47,71,23) // rgb(36,55,18)
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(48.94129, -22.10843); // K
+glVertex2f(53.24532, -11.80266); //L
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(45, 67, 27);/// 10 (antes 60,90,36) // rgb(45,67,27)
+glVertex2f(53.24532, -11.80266); //L
+glVertex2f(49.81, -5.09); //M
+glVertex2f(49.73, -12.14); // N
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(82, 92, 25);/// 11 (antes 103,115,31) // rgb(82,92,25)
+glVertex2f(40.59911, -13.39239); // H
+glVertex2f(38.91082, -14.36982); //P
+glVertex2f(37.97781, -18.70163); //J
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(186, 173, 96);/// 12 (antes 232,216,120) // rgb(186,173,96)
+glVertex2f(38.91082, -14.36982); //P
+glVertex2f(37.29398, -15.30546); // Q
+glVertex2f(35.66752, -8.54965); //D
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(170, 159, 70);/// 13 (antes 219,206,91) // rgb(170,159,70)
+glVertex2f(38.91082, -14.36982); //P
+glVertex2f(37.29398, -15.30546); // Q
+glVertex2f(37.97781, -18.70163); //J
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(83, 92, 24);/// 14 (antes 104,116,31) // rgb(83,92,24)
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(45.8253, 2.69051); // C
+glVertex2f(48.01, -1.58); //O
+glEnd();
+
+glBegin(GL_POLYGON);
+glColor3ub(170, 159, 70);/// 15 (antes 219,206,91) // rgb(170,159,70)
+glVertex2f(35.66752, -8.54965); //D
+glVertex2f(40.23563, -10.01009); //E
+glVertex2f(38.91082, -14.36982); //P
+glVertex2f(40.59911, -13.39239); // H
+glEnd();
+
+glBegin(GL_POLYGON);
+glColor3ub(52, 84, 35);/// 16 (antes 67,107,44) // rgb(52,84,35)
+glVertex2f(46.93021, -12.41495); //G
+glVertex2f(48.01, -1.58); //O
+glVertex2f(49.81, -5.09); //M
+glVertex2f(49.73, -12.14); // N
+glEnd();
+
+glBegin(GL_TRIANGLES);
+glColor3ub(70, 80, 22);/// 17 (antes 47,71,23) // rgb(7,80,22)
+glVertex2f(40.23563, -10.01009); //E
+glVertex2f(40.59911, -13.39239); // H
+glVertex2f(38.91082, -14.36982); //P
+glEnd();
+
+    glPopMatrix();
+    glPopMatrix();
+
+
+
+   glPushMatrix();
+    glTranslatef( -0.9 , -3.7 , 0.0 );
+    glScalef( 1.6 , 1.6 , 0.0 );
+
+    glPushMatrix();
+// Árbol - versión completa pintada para atardecer (sol detrás a la derecha)
+
+
+// ---------------- Hojas y copa ----------------
+glBegin(GL_TRIANGLES);
+    glColor3ub(110, 25, 20);   // sombra profunda (rojo vino)
+    glVertex2f(0.90, -1.63); // M
+    glVertex2f(1.58, -1.53); // U
+    glVertex2f(1.49, -2.02); // S
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(140, 40, 25);   // sombra media rojiza
+    glVertex2f(0.90, -1.63); // M
+    glVertex2f(1.49, -2.02); // S
+    glVertex2f(1.24, -2.52); // N
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(170, 50, 30);   // transición cálida oscura
+    glVertex2f(0.54, -2.10); // T
+    glVertex2f(1.58, -1.53); // U
+    glVertex2f(1.67, -2.43); // V
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(200, 80, 40); // centro anaranjado oscuro
+    glVertex2f(1.26, -2.96); // Z
+    glVertex2f(1.30, -2.55); // B1
+    glVertex2f(1.88, -2.68); // A1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(210, 95, 50); // naranja intenso oscuro
+    glVertex2f(1.26, -2.96); // Z
+    glVertex2f(1.88, -2.68); // A1
+    glVertex2f(1.71, -3.10); // G1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(150, 45, 30);  // sombra lateral rojiza
+    glVertex2f(0.54, -2.10); // T
+    glVertex2f(1.67, -2.43); // V
+    glVertex2f(1.28, -2.78); // W
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(200, 90, 50); // centro cálido controlado
+    glVertex2f(1.88, -2.68); // A1
+    glVertex2f(2.17, -2.75); // I1
+    glVertex2f(2.16, -2.82); // K1
+    glVertex2f(1.71, -3.10); // G1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(210, 100, 60); // derecho cálido oscuro
+    glVertex2f(2.17, -2.75); // I1
+    glVertex2f(2.30, -2.60); // H1
+    glVertex2f(2.16, -2.82); // K1
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(230, 130, 70); // iluminado cálido rojizo
+    glVertex2f(2.30, -2.60); // H1
+    glVertex2f(2.42, -2.43); // L1
+    glVertex2f(2.42, -2.76); // O
+    glVertex2f(2.28, -3.03); // P
+    glVertex2f(2.16, -2.82); // K1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(230, 120, 65); // luz directa (oscura)
+    glVertex2f(2.40, -1.80); // R
+    glVertex2f(3.18, -1.52); // F
+    glVertex2f(2.66, -1.90); // L
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(210, 100, 60); // hojas cálidas rojizas
+    glVertex2f(2.66, -1.90); // L
+    glVertex2f(3.18, -1.52); // F
+    glVertex2f(3.04, -2.28); // E1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(200, 95, 55); // centro derecho cálido
+    glVertex2f(2.40, -0.75); // E
+    glVertex2f(2.93, -1.95); // D1
+    glVertex2f(2.36, -2.08); // J
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(230, 130, 70); // reflejo cálido fuerte
+    glVertex2f(2.40, -1.80); // R
+    glVertex2f(3.48, -2.11); // G
+    glVertex2f(2.42, -2.76); // O
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(210, 110, 65); // derecha iluminada oscura
+    glVertex2f(2.42, -2.76); // O
+    glVertex2f(3.48, -2.11); // G
+    glVertex2f(3.18, -2.52); // F1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(170, 70, 40); // derecha oscura rojiza
+    glVertex2f(2.42, -2.76); // O
+    glVertex2f(3.18, -2.52); // F1
+    glVertex2f(3.14, -3.01); // H
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(140, 55, 35); // cálido-oscuro
+    glVertex2f(2.42, -2.76); // O
+    glVertex2f(3.14, -3.01); // H
+    glVertex2f(2.76, -3.15); // Q
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(110, 40, 25); // sombra baja profunda
+    glVertex2f(2.42, -2.76); // O
+    glVertex2f(2.76, -3.15); // Q
+    glVertex2f(2.28, -3.03); // P
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(200, 90, 55); // mezcla cálida
+    glVertex2f(2.40, -0.75); // E
+    glVertex2f(2.66, -1.90); // L
+    glVertex2f(2.60, -2.41); // K
+    glVertex2f(2.36, -2.08); // J
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(170, 70, 45); // transición centro
+    glVertex2f(2.60, -2.41); // K
+    glVertex2f(2.42, -2.43); // L1
+    glVertex2f(2.30, -2.60); // H1
+    glVertex2f(1.24, -2.52); // N
+    glVertex2f(2.36, -2.08); // J
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(140, 60, 40); // sombra centro
+    glVertex2f(1.24, -2.52); // N
+    glVertex2f(2.30, -2.60); // H1
+    glVertex2f(2.17, -2.75); // I1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(120, 50, 30); // sombra baja centro
+    glVertex2f(1.24, -2.52); // N
+    glVertex2f(2.17, -2.75); // I1
+    glVertex2f(2.10, -2.90); // J1
+glEnd();
+
+glBegin(GL_TRIANGLES); 
+    glColor3ub(200, 100, 60); // luz suave izquierda
+    glVertex2f(2.40, -0.75); // E
+    glVertex2f(2.36, -2.08); // J
+    glVertex2f(1.13, -1.30); // I
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(170, 80, 50); // cálido izquierdo
+    glVertex2f(1.13, -1.30); // I
+    glVertex2f(2.36, -2.08); // J
+    glVertex2f(1.46, -1.84); // C1
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(140, 65, 40); // transición izquierda
+    glVertex2f(1.46, -1.84); // C1
+    glVertex2f(2.36, -2.08); // J
+    glVertex2f(1.24, -2.52); // N
+glEnd();    
+
+// ---------------- Tronco ----------------
+glBegin(GL_TRIANGLES);
+    glColor3ub(90, 45, 25); // tronco sombra oscura
+    glVertex2f(1.91, -3.74); // A₂
+    glVertex2f(2.05, -3.51); // B₂
+    glVertex2f(2.02, -3.78); // S₁
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(140, 70, 35); // tronco cálido oscuro
+    glVertex2f(2.08, -2.79); // W₁
+    glVertex2f(2.13, -2.73); // U₁
+    glVertex2f(2.02, -3.78); // S₁
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(120, 60, 35); // tronco centro
+    glVertex2f(2.13, -2.73); // U₁
+    glVertex2f(2.22, -3.28); // N₁
+    glVertex2f(2.02, -3.78); // S₁
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(160, 80, 40); // tronco iluminado
+    glVertex2f(2.13, -2.73); // U₁
+    glVertex2f(2.18, -2.75); // V₁
+    glVertex2f(2.37, -3.74); // T₁
+    glVertex2f(2.22, -3.28); // N₁
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(180, 90, 50); // highlight tronco cálido
+    glVertex2f(2.22, -3.28); // N₁
+    glVertex2f(2.37, -3.74); // T₁
+    glVertex2f(2.25, -3.78); // Z₁
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(80, 40, 25); // sombra profunda tronco
+    glVertex2f(2.22, -3.28); // N₁
+    glVertex2f(2.25, -3.78); // Z₁
+    glVertex2f(2.02, -3.78); // S₁
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(110, 55, 35); // detalle tronco
+    glVertex2f(1.84, -2.84); // J₁
+    glVertex2f(2.09, -3.03); // I₁
+    glVertex2f(2.10, -3.09); // M₁
+    glVertex2f(1.83, -2.85); // K₁
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(95, 50, 30); // detalle oscuro
+    glVertex2f(2.10, -3.09); // M₁
+    glVertex2f(2.07, -3.14); // D₁
+    glVertex2f(2.29, -3.28); // P₁
+    glVertex2f(1.83, -2.85); // K₁
+glEnd();
+
+glBegin(GL_POLYGON);
+    glColor3ub(150, 75, 40); // lateral iluminado
+    glVertex2f(2.22, -3.28); // N₁
+    glVertex2f(2.58, -2.94); // O₁
+    glVertex2f(2.59, -2.95); // Q₁
+    glVertex2f(2.29, -3.28); // P₁
+glEnd();
+
+glBegin(GL_TRIANGLES);
+    glColor3ub(130, 65, 35); // volumen tronco
+    glVertex2f(2.58, -2.94); // O₁
+    glVertex2f(2.22, -3.28); // N₁
+    glVertex2f(2.18, -3.21); // R₁
+glEnd();
+
+glPopMatrix();
+glPopMatrix();
